@@ -14,7 +14,7 @@ public class CatLoginController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginCredentials loginCredentials)
     {
         Console.WriteLine("User attempted to Login");
-        var role = loginCredentials.Password == "Admin" ? "Admin" : "General";
+        var role = loginCredentials.UserName.StartsWith("US_") ? "Admin" : "General";
         var claims = new List<Claim>
         {
             new("Name", loginCredentials.UserName),

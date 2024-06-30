@@ -1,4 +1,5 @@
 using CatsAPI.Data;
+using CatsAPI.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CatsAPI.Controllers;

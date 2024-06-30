@@ -15,7 +15,6 @@ public class AdminCatAuthorizationFilterAttribute : Attribute, IAuthorizationFil
         }
 
         Claim? claim = claims.Find(x => x.Type == "Role");
-        Claim? userNameClaim = claims.Find(x => x.Type == "Name");
         if (claim == null || claim.Value != "Admin"){
             context.Result = new UnauthorizedResult();
         }

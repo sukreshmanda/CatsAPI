@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: Controllers/CatLoginController.cs
+  checksum: e010d62bec99234162d42b7140f247b57f7b4b10311a2466d5c039ba09a0f420
+version: ""

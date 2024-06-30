@@ -1,16 +1,11 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+using CatsAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-    // .AddCookie(opt => {
-    //     opt.ExpireTimeSpan = TimeSpan.FromSeconds(60);
-    //     opt.Cookie.Name = "CatAPICookie";
-    //     opt.LoginPath = "/Cats/Login";
-    // });
+builder.Services.AddCookieAuthentication();
 
 var app = builder.Build();
 

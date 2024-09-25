@@ -12,7 +12,7 @@
  // Represents a class derived from ControllerBase (i.e., ASP.NET Core controller)
  class AspNetController extends Class {
    AspNetController() {
-     this.getABaseType+().hasQualifiedName("Microsoft.AspNetCore.Mvc.ControllerBase")
+     this.getABaseType+().hasFullyQualifiedName("Microsoft.AspNetCore.Mvc", "ControllerBase")
     //  this.extends(any(Class t | t.hasQualifiedName("Microsoft.AspNetCore.Mvc", "")))
    }
  }

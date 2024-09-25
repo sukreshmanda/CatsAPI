@@ -32,25 +32,26 @@
  
  // Check if a method has any of the Route-related HTTP attributes (Route, HttpPost, HttpPut, HttpDelete, HttpGet)
  predicate hasHttpRouteAttribute(Method m) {
-   exists(Attribute a |
-     (
-       a.getName() = "Route" or
-       a.getName() = "HttpPost" or
-       a.getName() = "HttpPut" or
-       a.getName() = "HttpDelete" or
-       a.getName() = "HttpGet"
-     ) and
-     a.getTarget() = m
-   )
- }
- 
- // Check if a parameter has the FromBody attribute
- predicate hasFromBodyAttribute(Parameter p) {
-   exists(Attribute a |
-     a.getName() = "FromBody" and
-     a.getTarget() = p
-   )
- }
+  exists(Attribute a |
+    (
+      a instanceof "Microsoft.AspNetCore.Mvc.RouteAttribute" or
+      a instanceof "Microsoft.AspNetCore.Mvc.HttpPostAttribute" or
+      a instanceof "Microsoft.AspNetCore.Mvc.HttpPutAttribute" or
+      a instanceof "Microsoft.AspNetCore.Mvc.HttpDeleteAttribute" or
+      a instanceof "Microsoft.AspNetCore.Mvc.HttpGetAttribute"
+    ) and
+    a.getTarget() = m
+  )
+}
+
+// Check if a parameter has the FromBody attribute
+predicate hasFromBodyAttribute(Parameter p) {
+  exists(Attribute a |
+    a instanceof "Microsoft.AspNetCore.Mvc.FromBodyAttribute" and
+    a.getTarget() = p
+  )
+}
+
  
  // Helper predicate to check if a type is primitive
  predicate isPrimitiveType(Type t) {

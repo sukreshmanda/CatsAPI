@@ -4,6 +4,7 @@
  * @kind problem
  * @problem.severity error
  * @precision high
+ * @id csharp/no-from-body
  * @tags style
  */
 

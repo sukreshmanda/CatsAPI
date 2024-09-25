@@ -54,7 +54,11 @@
  
  // Helper predicate to check if a type is primitive
  predicate isPrimitiveType(Type t) {
-   t instanceof PrimitiveType // This covers all primitive types
+  t instanceof IntType or
+  t instanceof LongType or
+  t instanceof BooleanType or
+  t instanceof StringType or
+  t instanceof DoubleType // This covers all primitive types
  }
  
  // Find methods where a parameter is non-primitive and the method has specific HTTP method attributes, but lacks the [FromBody] attribute

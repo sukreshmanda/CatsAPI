@@ -34,11 +34,11 @@
  predicate hasHttpRouteAttribute(Method m) {
   exists(Attribute a |
     (
-      a.getType() instanceof "Microsoft.AspNetCore.Mvc.RouteAttribute" or
-      a.getType() instanceof "Microsoft.AspNetCore.Mvc.HttpPostAttribute" or
-      a.getType() instanceof "Microsoft.AspNetCore.Mvc.HttpPutAttribute" or
-      a.getType() instanceof "Microsoft.AspNetCore.Mvc.HttpDeleteAttribute" or
-      a.getType() instanceof "Microsoft.AspNetCore.Mvc.HttpGetAttribute"
+      a.getType().getName() = "RouteAttribute" or
+      a.getType().getName() = "HttpPostAttribute" or
+      a.getType().getName() = "HttpPutAttribute" or
+      a.getType().getName() = "HttpDeleteAttribute" or
+      a.getType().getName() = "HttpGetAttribute"
     ) and
     a.getTarget() = m
   )
@@ -47,7 +47,7 @@
 // Check if a parameter has the FromBody attribute
 predicate hasFromBodyAttribute(Parameter p) {
   exists(Attribute a |
-    a.getType() instanceof "Microsoft.AspNetCore.Mvc.FromBodyAttribute" and
+    a.getType().getName() = "FromBodyAttribute" and
     a.getTarget() = p
   )
 }

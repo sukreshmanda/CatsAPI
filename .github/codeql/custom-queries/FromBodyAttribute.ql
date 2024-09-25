@@ -56,7 +56,7 @@
  predicate isPrimitiveType(Type t) {
   t instanceof IntType or
   t instanceof LongType or
-  t instanceof BooleanType or
+  t instanceof BoolType or
   t instanceof StringType or
   t instanceof DoubleType // This covers all primitive types
  }

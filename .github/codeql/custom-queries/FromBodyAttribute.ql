@@ -74,5 +74,5 @@
  
 
 from RefType type
-where type.getABaseType+().hasQualifiedName("System.Collections.IEnumerator")
+where type.getABaseType+().hasQualifiedName("Microsoft.AspNetCore.Mvc.ControllerBase")
 select type

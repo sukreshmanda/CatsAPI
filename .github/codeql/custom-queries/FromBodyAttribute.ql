@@ -10,29 +10,24 @@
 
  import csharp
 
- // Represents a class derived from ControllerBase (i.e., ASP.NET Core controller)
  class AspNetController extends Class {
    AspNetController() {
      this.getABaseType+().hasFullyQualifiedName("Microsoft.AspNetCore.Mvc", "ControllerBase")
-    //  this.extends(any(Class t | t.hasQualifiedName("Microsoft.AspNetCore.Mvc", "")))
    }
  }
  
- // Represents a method in a controller
  class ControllerMethod extends Method {
    ControllerMethod() {
      this.getDeclaringType() instanceof AspNetController
    }
  }
  
- // Represents a parameter of a method in a controller
  class ControllerParameter extends Parameter {
    ControllerParameter() {
      exists(ControllerMethod m | this = m.getParameter(_))
    }
  }
  
- // Check if a method has any of the Route-related HTTP attributes (Route, HttpPost, HttpPut, HttpDelete, HttpGet)
  predicate hasHttpRouteAttribute(Method m) {
   exists(Attribute a |
     (
@@ -46,7 +41,6 @@
   )
 }
 
-// Check if a parameter has the FromBody attribute
 predicate hasFromBodyAttribute(Parameter p) {
   exists(Attribute a |
     a.getType().getName() = "FromBodyAttribute" and
@@ -55,21 +49,19 @@ predicate hasFromBodyAttribute(Parameter p) {
 }
 
  
- // Helper predicate to check if a type is primitive
  predicate isPrimitiveType(Type t) {
   t instanceof IntType or
   t instanceof LongType or
   t instanceof BoolType or
   t instanceof StringType or
-  t instanceof DoubleType // This covers all primitive types
+  t instanceof DoubleType 
  }
  
- // Find methods where a parameter is non-primitive and the method has specific HTTP method attributes, but lacks the [FromBody] attribute
  from ControllerMethod m, ControllerParameter p
  where
    p = m.getParameter(_) and
-   m.getNumberOfParameters() > 0 and
-   hasHttpRouteAttribute(m) and                // Ensure the method has one of the HTTP method attributes
-   not isPrimitiveType(p.getType()) and        // Ensure the parameter is not a primitive type
-   not hasFromBodyAttribute(p)                 // Ensure the parameter does not have the [FromBody] attribute
- select p, "The parameter '" + p.getName()+ "["+p.getType()+"]" + "' in the method '" + m.getName() + ": "+m.getDeclaringType()
+   m.getNumberOfParameters() > 1 and
+   hasHttpRouteAttribute(m) and                
+   not isPrimitiveType(p.getType()) and        
+   not hasFromBodyAttribute(p)                
+ select p, "The parameter '" + p.getName()+ "["+p.getType()+"]" + "' in the method '" + m.getName() + ": "+m.getDeclaringType() +"Params count: "+m.getNumberOfParameters()

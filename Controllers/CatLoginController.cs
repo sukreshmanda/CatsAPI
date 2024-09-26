@@ -11,7 +11,7 @@ public class CatLoginController : ControllerBase
 {
     [HttpPost]
     [Route("/login")]
-    public async Task<IActionResult> LoginV1([FromBody] LoginCredentialsV1 loginCredentials)
+    public async Task<IActionResult> LoginV1(LoginCredentialsV1 loginCredentials)
     {
         Console.WriteLine("User attempted to Login");
         var role = loginCredentials.UserName.StartsWith("US_") ? "Admin" : "General";

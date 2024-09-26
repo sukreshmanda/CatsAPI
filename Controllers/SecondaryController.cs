@@ -8,13 +8,19 @@ public class SecondaryController : BaseController
 {
     [HttpPost]
     [Route("/login")]
-    public void Login([FromBody] MessageRequest loginCredentials)
+    public void LoginV2([FromBody] MessageRequest loginCredentials)
     {
         return;
     }
 
-    [HttpPost("/logout")]
-    public void Logout(MessageRequest logout)
+    [HttpPost("/logoutv2")]
+    public void LogoutV2([FromBody] MessageRequest logout)
+    {
+        return;
+    }
+
+    [HttpPost("/logoutv3/{id}")]
+    public void LogoutWithParamV3(int id, [FromBody] MessageRequest logoutNo)
     {
         return;
     }

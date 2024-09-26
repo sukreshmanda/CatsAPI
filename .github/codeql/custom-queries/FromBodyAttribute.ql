@@ -67,7 +67,9 @@ predicate hasFromBodyAttribute(Parameter p) {
  // Find methods where a parameter is non-primitive and the method has specific HTTP method attributes, but lacks the [FromBody] attribute
  from ControllerMethod m, ControllerParameter p
  where
+   p = m.getParameter(_) and
+   m.getNumberOfParameters() > 0 and
    hasHttpRouteAttribute(m) and                // Ensure the method has one of the HTTP method attributes
    not isPrimitiveType(p.getType()) and        // Ensure the parameter is not a primitive type
    not hasFromBodyAttribute(p)                 // Ensure the parameter does not have the [FromBody] attribute
- select p, "The parameter '" + p.getName() + "' in the method '" + m.getName() + "' must have the [FromBody] attribute because the method has a route and the parameter is not a primitive type."
+ select p, "The parameter '" + p.getName()+ "["+p.getType()+"]" + "' in the method '" + m.getName() + ": "+m.getDeclaringType()
